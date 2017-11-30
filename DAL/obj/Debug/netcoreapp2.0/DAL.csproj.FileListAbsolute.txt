@@ -1,0 +1,11 @@
+F:\CodeSpace\CIT255\CIT255FinalApplication\DAL\bin\Debug\netcoreapp2.0\DAL.deps.json
+F:\CodeSpace\CIT255\CIT255FinalApplication\DAL\bin\Debug\netcoreapp2.0\DAL.dll
+F:\CodeSpace\CIT255\CIT255FinalApplication\DAL\obj\Debug\netcoreapp2.0\DAL.csprojResolveAssemblyReference.cache
+F:\CodeSpace\CIT255\CIT255FinalApplication\DAL\obj\Debug\netcoreapp2.0\DAL.csproj.CoreCompileInputs.cache
+F:\CodeSpace\CIT255\CIT255FinalApplication\DAL\obj\Debug\netcoreapp2.0\DAL.AssemblyInfoInputs.cache
+F:\CodeSpace\CIT255\CIT255FinalApplication\DAL\obj\Debug\netcoreapp2.0\DAL.AssemblyInfo.cs
+F:\CodeSpace\CIT255\CIT255FinalApplication\DAL\bin\Debug\netcoreapp2.0\DAL.pdb
+F:\CodeSpace\CIT255\CIT255FinalApplication\DAL\obj\Debug\netcoreapp2.0\DAL.dll
+F:\CodeSpace\CIT255\CIT255FinalApplication\DAL\obj\Debug\netcoreapp2.0\DAL.pdb
+F:\CodeSpace\CIT255\CIT255FinalApplication\DAL\bin\Debug\netcoreapp2.0\Application.dll
+F:\CodeSpace\CIT255\CIT255FinalApplication\DAL\bin\Debug\netcoreapp2.0\Application.pdb
