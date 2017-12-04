@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{8
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{C4D76B96-6DCF-486C-8A29-ED3A5014C240}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CIT255FinalAppTest", "CIT255FinalAppTest\CIT255FinalAppTest.csproj", "{DF501CA8-258A-428F-BEA1-A0096E4D2F17}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Data\Data.projitems*{ceff97d8-be57-46c0-b74d-2805d0e72b04}*SharedItemsImports = 13
@@ -26,6 +28,10 @@ Global
 		{C4D76B96-6DCF-486C-8A29-ED3A5014C240}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4D76B96-6DCF-486C-8A29-ED3A5014C240}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4D76B96-6DCF-486C-8A29-ED3A5014C240}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF501CA8-258A-428F-BEA1-A0096E4D2F17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF501CA8-258A-428F-BEA1-A0096E4D2F17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF501CA8-258A-428F-BEA1-A0096E4D2F17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF501CA8-258A-428F-BEA1-A0096E4D2F17}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

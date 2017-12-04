@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using SLICKIce.Application.Models;
+using SLICKIce.Application.Data;
 
 namespace SLICKIce.Application
 {
@@ -22,10 +23,10 @@ namespace SLICKIce.Application
         /// <param name="services">The services this site uses.</param>
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvcCore();
+			// add database context and set the connection
+			services.AddDbContext<SLICKIceDBContext>(options => options.UseSqlServer(AppUtil.sqlserverConnectionString));
 
-            // add database context
-            services.AddDbContext<SLICKIceDBContext>(options => options.UseSqlServer(AppUtil.sqlserverConnectionString));
+			services.AddMvcCore();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

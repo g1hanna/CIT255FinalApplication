@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace SLICKIce.DAL
 {
@@ -9,13 +11,13 @@ namespace SLICKIce.DAL
     /// Repository pattern.
     /// </summary>
     /// <typeparam name="T">The type of record to use</param>
-    public interface IRespository<T>
+    public interface IRespository<T> : IDisposable where T : class
     {
-        List<T> SelectAll();
-        T SelectById(int id);
+        IQueryable<T> SelectAll();
+        T SelectById(T record);
         void Insert(T record);
         void Update(T record);
-        void Delete(int id);
+        void Delete(T record);
         void Save();
     }
 }

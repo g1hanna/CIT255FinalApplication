@@ -9,3 +9,5 @@ F:\CodeSpace\CIT255\CIT255FinalApplication\Application\obj\Debug\netcoreapp2.0\A
 F:\CodeSpace\CIT255\CIT255FinalApplication\Application\obj\Debug\netcoreapp2.0\Application.AssemblyInfo.cs
 F:\CodeSpace\CIT255\CIT255FinalApplication\Application\obj\Debug\netcoreapp2.0\Application.dll
 F:\CodeSpace\CIT255\CIT255FinalApplication\Application\obj\Debug\netcoreapp2.0\Application.pdb
+F:\CodeSpace\CIT255\CIT255FinalApplication\Application\bin\Debug\netcoreapp2.0\DAL.dll
+F:\CodeSpace\CIT255\CIT255FinalApplication\Application\bin\Debug\netcoreapp2.0\DAL.pdb
