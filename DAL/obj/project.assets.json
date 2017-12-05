@@ -12587,9 +12587,6 @@
   },
   "project": {
     "version": "1.0.0",
-    "restoreSettings": {
-      "hideWarningsAndErrors": true
-    },
     "restore": {
       "projectUniqueName": "F:\\CodeSpace\\CIT255\\CIT255FinalApplication\\DAL\\DAL.csproj",
       "projectName": "DAL",
@@ -12625,14 +12622,6 @@
     "frameworks": {
       "netcoreapp2.0": {
         "dependencies": {
-          "Microsoft.EntityFrameworkCore": {
-            "target": "Package",
-            "version": "2.0.1"
-          },
-          "sqlite": {
-            "target": "Package",
-            "version": "3.13.0"
-          },
           "Microsoft.NETCore.App": {
             "suppressParent": "All",
             "target": "Package",
@@ -12642,6 +12631,14 @@
           "Microsoft.AspNetCore.All": {
             "target": "Package",
             "version": "2.0.3"
+          },
+          "Microsoft.EntityFrameworkCore": {
+            "target": "Package",
+            "version": "2.0.1"
+          },
+          "sqlite": {
+            "target": "Package",
+            "version": "3.13.0"
           }
         },
         "imports": [
