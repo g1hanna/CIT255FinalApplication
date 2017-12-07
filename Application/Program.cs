@@ -25,12 +25,18 @@ namespace SLICKIce.Application
 				try
 				{
 					var context = services.GetRequiredService<SLICKIceDBContext>();
-					DbInitializer.InitializeAsync(context);
+					bool success = DbInitializer.Initialize(context);
+
+					if (!success) {
+						throw new ObjectDisposedException("context",
+							"SLICKIce context was disposed during or before seeding the Database.");
+					}
 				}
 				catch (Exception ex)
 				{
 					var logger = services.GetRequiredService<ILogger<Program>>();
 					logger.LogError(ex, "An error occured while seeding the database.");
+					logger.LogError(ex, $"Here is more information about this error:\nError: {ex.Message}");
 				}
 			}
 

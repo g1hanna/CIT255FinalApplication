@@ -1,3 +1,4 @@
+#region Usings
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ using SLICKIce.Application.Data;
 using SLICKIce.Application.Business;
 using SLICKIce.Application;
 using SLICKIce.DAL;
+#endregion
 
 namespace CIT255FinalAppTest
 {
@@ -31,7 +33,7 @@ namespace CIT255FinalAppTest
 				//try
 				//{
 				context = services.GetRequiredService<SLICKIceDBContext>();
-				DbInitializer.InitializeOverwriteAsync(context);
+				DbInitializer.InitializeOverwrite(context);
 
 				WinterGearRepositoryEFC winterGearRepo = new WinterGearRepositoryEFC(context);
 
@@ -88,7 +90,7 @@ namespace CIT255FinalAppTest
 				var services = scope.ServiceProvider;
 
 				context = services.GetRequiredService<SLICKIceDBContext>();
-				DbInitializer.InitializeOverwriteAsync(context);
+				DbInitializer.InitializeOverwrite(context);
 
 				var accountRepo = new AccountRepositoryEFC(context);
 
@@ -141,7 +143,7 @@ namespace CIT255FinalAppTest
 				var services = scope.ServiceProvider;
 
 				context = services.GetRequiredService<SLICKIceDBContext>();
-				DbInitializer.InitializeOverwriteAsync(context);
+				DbInitializer.InitializeOverwrite(context);
 
 				var inventoryRepo = new InventoryRepositoryEFC(context);
 
@@ -193,7 +195,7 @@ namespace CIT255FinalAppTest
 				//try
 				//{
 				context = services.GetRequiredService<SLICKIceDBContext>();
-				DbInitializer.InitializeOverwriteAsync(context);
+				DbInitializer.InitializeOverwrite(context);
 
 				WinterGearRepositoryEFC winterGearRepo = new WinterGearRepositoryEFC(context);
 				ICollection<Item> gearItems;

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using SLICKIce.Application.Models;
@@ -9,50 +11,64 @@ namespace SLICKIce.Application.Data
 {
     public static class DbInitializer
     {
-		public static async void InitializeAsync(SLICKIceDBContext context)
+		public static bool Initialize(SLICKIceDBContext context)
 		{
 			context.Database.EnsureCreated();
+			bool anyAccounts = false;
+			bool dbInitialized = true;
 
 			// look for any users
-			bool anyAccounts = await context.Account.AnyAsync();
-			
-			// add some if none available
-			if (!anyAccounts)
-			{
-				// add test accounts
-				Account[] accounts = generateTestAccounts();
-
-				foreach (Account a in accounts)
-				{
-					context.Add(a);
+			try {
+				IEnumerable<Account> accountRecords = context.Account.FromSql("SELECT * FROM Account");
+				foreach (var a in accountRecords) {
+					if (a != null) {
+						anyAccounts = true;
+						break;
+					}
 				}
 
-				context.SaveChanges();
-
-				// add test items
-				Item[] items = generateTestItems();
-
-				foreach (Item i in items)
+					// add some if none available
+				if (!anyAccounts)
 				{
-					context.Add(i);
+					// add test accounts
+					Account[] accounts = generateTestAccounts();
+
+					foreach (Account a in accounts)
+					{
+						context.Add(a);
+					}
+
+					context.SaveChanges();
+
+					// add test items
+					Item[] items = generateTestItems();
+
+					foreach (Item i in items)
+					{
+						context.Add(i);
+					}
+
+					context.SaveChanges();
+
+					// add test inventory
+					Inventory[] inventory = generateTestInventory();
+
+					foreach (Inventory i in inventory)
+					{
+						context.Add(i);
+					}
+
+					context.SaveChanges();
 				}
-
-				context.SaveChanges();
-
-				// add test inventory
-				Inventory[] inventory = generateTestInventory();
-
-				foreach (Inventory i in inventory)
-				{
-					context.Add(i);
-				}
-
-				context.SaveChanges();
+			}
+			catch (Exception) {
+				dbInitialized = false;
 			}
 
+			return dbInitialized;
 		}
 
-		public static void InitializeOverwriteAsync(SLICKIceDBContext context)
+		public static void InitializeOverwrite(SLICKIceDBContext context)
 		{
 			context.Database.EnsureDeleted();
 			context.Database.EnsureCreated();
