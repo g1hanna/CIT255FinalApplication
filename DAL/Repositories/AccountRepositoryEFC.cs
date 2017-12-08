@@ -5,10 +5,12 @@ using SLICKIce.Application.Models;
 using SLICKIce.Application.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Linq.Expressions;
 
 namespace SLICKIce.DAL
 {
-	public class AccountRepositoryEFC : IRespository<Account>
+	public class AccountRepositoryEFC : IRespository<Account>, IRespositoryAsync<Account>
 	{
 		SLICKIceDBContext _context;
 
@@ -46,7 +48,7 @@ namespace SLICKIce.DAL
 
 		public IQueryable<Account> SelectAll()
 		{
-			return _context.Account.FromSql("SELECT * FROM Account");
+			return _context.Account.Where(a => true);
 		}
 
 		public Account SelectById(Account record)
@@ -59,13 +61,6 @@ namespace SLICKIce.DAL
 			var target = _context.Account.SingleOrDefault(a => a.AccountId == record.AccountId);
 			Delete(target);
 			Insert(record);
-			//_accounts.FromSql("UPDATE Account SET "+
-				//$"AccountId = {record.AccountId}, "+
-				//$"AccountUsername = {record.AccountUsername}, "+
-				//$"AccountPassword = {record.AccountPassword}, "+
-				//$"AccountFirstName = {record.AccountFirstName}, "+
-				//$"AccountLastName = {record.AccountLastName} "+
-				//$"WHERE AccountId = {record.AccountId};");
 			Save();
 		}
 
@@ -79,10 +74,10 @@ namespace SLICKIce.DAL
 				if (disposing)
 				{
 					// TODO: dispose managed state (managed objects).
+					_context.Dispose();
 				}
 
 				// TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
-				_context.Dispose();
 
 				// TODO: set large fields to null.
 				
@@ -90,11 +85,11 @@ namespace SLICKIce.DAL
 			}
 		}
 
-		// TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
-		// ~AccountRepository() {
-		//   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
-		//   Dispose(false);
-		// }
+		// override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
+		~AccountRepositoryEFC() {
+		  // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+		  Dispose(false);
+		}
 
 		// This code added to correctly implement the disposable pattern.
 		public void Dispose()
@@ -106,5 +101,44 @@ namespace SLICKIce.DAL
 		}
 		#endregion
 
+		public async Task<IQueryable<Account>> SelectAllAsync()
+		{
+			return await new Task<IQueryable<Account>>(SelectAll);
+		}
+
+		public async Task<Account> SelectByIdAsync(Account record)
+		{
+			return await _context.Account.SingleOrDefaultAsync(a => a.AccountId == record.AccountId);
+		}
+
+		public async void InsertAsync(Account record)
+		{
+			await _context.AddAsync(record);
+			//_accounts.FromSql($"INSERT INTO Account VALUES ( {record.AccountId}, {record.AccountUsername}, {record.AccountPassword}, {record.AccountFirstName}, {record.AccountLastName} )");
+			SaveAsync();
+		}
+
+		public async void UpdateAsync(Account record)
+		{
+			var target = await _context.Account.SingleOrDefaultAsync(a => a.AccountId == record.AccountId);
+			
+			Delete(target);
+			Insert(record);
+			SaveAsync();
+		}
+
+		public async void DeleteAsync(Account record)
+		{
+			var target = await _context.Account.SingleOrDefaultAsync(a => a.AccountId == record.AccountId);
+
+			_context.Remove(target);
+			//_accounts.FromSql($"DELETE FROM Account WHERE AccountId = {record.AccountId};");
+			SaveAsync();
+		}
+
+		public async void SaveAsync()
+		{
+			await _context.SaveChangesAsync();
+		}
 	}
 }
