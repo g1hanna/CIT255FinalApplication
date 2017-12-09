@@ -9,13 +9,13 @@ using SLICKIce.Application.Models;
 using SLICKIce.DAL;
 
 namespace SLICKIce.Application.Controllers {
+
+
 	public class HomeController : Controller {
 		private readonly SLICKIceDBContext _context;
-		private Account _currentUser;
 
-		public HomeController(SLICKIceDBContext context) {
+		public HomeController(SLICKIceAppData appData, SLICKIceDBContext context) {
 			_context = context;
-			_currentUser = null;
 		}
 		
 		// GET: /Home/
@@ -64,8 +64,6 @@ namespace SLICKIce.Application.Controllers {
 					// find first password
 					if (target.AccountPassword == password) {
 						loginSuccess = true;
-
-						_currentUser = target;
 					}
 				}
 			}
