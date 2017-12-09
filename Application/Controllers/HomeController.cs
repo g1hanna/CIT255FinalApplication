@@ -14,7 +14,7 @@ namespace SLICKIce.Application.Controllers {
 	public class HomeController : Controller {
 		private readonly SLICKIceDBContext _context;
 
-		public HomeController(SLICKIceAppData appData, SLICKIceDBContext context) {
+		public HomeController(SLICKIceDBContext context) {
 			_context = context;
 		}
 		
@@ -35,41 +35,6 @@ namespace SLICKIce.Application.Controllers {
 
 		public IActionResult Login() {
 			return View();
-		}
-
-		public IActionResult Login(string userName, string password) {
-			bool success = login(userName, password);
-
-			if (success) {
-				ViewResult r = new ViewResult();
-				
-			}
-		}
-
-		private bool login(string userName, string password) {
-			// load accounts data
-			var accountsRepo = new AccountRepositoryEFC(_context) as IRespository<Account>;
-			var accounts = accountsRepo.SelectAll() as IEnumerable<Account>;
-			bool loginSuccess = false;
-
-			// get all accounts
-			if (accounts.Count() > 0) {
-				var targets = from a in accountsRepo.SelectAll() as IEnumerable<Account>
-					where a.AccountUsername == userName select a;
-
-				// get first matching
-				if (targets.Count() > 0) {
-					var target = targets.First();
-
-					// find first password
-					if (target.AccountPassword == password) {
-						loginSuccess = true;
-					}
-				}
-			}
-
-			// return status
-			return loginSuccess;
 		}
 	}
 }

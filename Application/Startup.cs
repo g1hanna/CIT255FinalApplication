@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Session;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using SLICKIce.Application.Models;
@@ -33,11 +33,6 @@ namespace SLICKIce.Application
 
 			// add a default in-memory implementation of IDistributedCache
 			services.AddDistributedMemoryCache();
-
-			//
-			services.AddIdentity<ApplicationUser, IdentityRole>()
-				.AddEntityFrameworkStores<ApplicationDbContext>()
-				.AddDefaultTokenProviders();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,7 +50,7 @@ namespace SLICKIce.Application
 			//     await context.Response.WriteAsync("Hello World!");
 			// });
 
-			app.UseSession();
+			//app.UseSession();
 
 			app.UseMvc(routes =>
 			{
