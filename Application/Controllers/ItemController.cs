@@ -1,10 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using SLICKIce.Application.Business;
 using SLICKIce.Application.Data;
 using SLICKIce.Application.Models;
 using SLICKIce.DAL;
@@ -21,9 +24,42 @@ namespace SLICKIce.Application.Controllers
         }
 
         // GET: Item
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
-            return View(await _itemsRepo.SelectAll().ToListAsync());
+            ViewData["ConditionSortParm"] = String.IsNullOrEmpty(sortOrder) ? "condition_desc" : "";
+            ViewData["IdSortParm"] = sortOrder == "Id" ? "id_desc" : "Id";
+            ViewData["CurrentFilter"] = searchString;
+            
+            ItemBusiness itemBusiness = new ItemBusiness(_itemsRepo);
+            IQueryable<Item> sortedItems;
+
+            switch (sortOrder)
+            {
+                case "condition_desc":
+                    sortedItems = itemBusiness.SortItemsByCondition(false);
+                    break;
+                case "Id":
+                    sortedItems = itemBusiness.SortItemsById(true);
+                    break;
+                case "id_desc":
+                    sortedItems = itemBusiness.SortItemsById(false);
+                    break;
+                default:
+                    sortedItems = itemBusiness.SortItemsByCondition(true);
+                    break;
+            }
+
+            if (!String.IsNullOrEmpty(searchString)) {
+                // turns search into a regex
+                var reg = new Regex(searchString);
+                
+                // invokes the regex
+                sortedItems = from i in sortedItems
+                    where reg.Match(i.ItemName).Success || reg.Match(i.ItemDescription).Success
+                    select i;
+            }
+
+            return View(await sortedItems.AsNoTracking().ToListAsync());
         }
 
         // GET: Item/Details/5
@@ -96,7 +132,7 @@ namespace SLICKIce.Application.Controllers
             {
                 try
                 {
-                    _itemsRepo.UpdateAsync(item);
+                    _itemsRepo.Update(item);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -145,5 +181,7 @@ namespace SLICKIce.Application.Controllers
         {
             return _itemsRepo.SelectById(new Item { ItemId = (int)id }) != null;
         }
+
+        
     }
 }

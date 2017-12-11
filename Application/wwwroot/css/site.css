@@ -1,4 +1,7 @@
 ﻿body {
+    background-image: url("../images/SlickIceSceneryBlurred.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
     padding-top: 50px;
     padding-bottom: 20px;
 }
@@ -32,4 +35,10 @@
     .carousel-caption {
         display: none;
     }
+}
+
+#main-content {
+    background-image: url("../images/SlickIceSceneryBlurred.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
