@@ -1,6 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using SLICKIce.Application.Models;
 
 namespace SLICKIce.Application.Data
@@ -21,7 +27,7 @@ namespace SLICKIce.Application.Data
             if (!optionsBuilder.IsConfigured)
             {
                 //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer(AppUtil.sqlserverConnectionString);
+				optionsBuilder.UseSqlServer(AppUtil.sqlserverConnectionString);
             }
         }
 
@@ -75,7 +81,7 @@ namespace SLICKIce.Application.Data
 			{
 				entity.Property(e => e.ItemId)
 					.HasColumnName("ItemID")
-					.ValueGeneratedNever();
+					.ValueGeneratedOnAdd();
 
 				entity.Property(e => e.ItemCondition).HasDefaultValueSql("((10))");
 
@@ -91,6 +97,12 @@ namespace SLICKIce.Application.Data
 
 				entity.Property(e => e.ItemType).HasDefaultValueSql("((2))");
 			});
+
+			modelBuilder.Entity<Item>().HasKey(i => i.ItemId);
+		}
+
+		public override void Dispose() {
+			base.Dispose();
 		}
     }
 }

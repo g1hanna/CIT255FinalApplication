@@ -1,40 +1,37 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
-using System.Linq.Expressions;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Encodings.Web;
-using SLICKIce.Application.Data;
 using SLICKIce.Application.Models;
-using SLICKIce.DAL;
 
-namespace SLICKIce.Application.Controllers {
+namespace SLICKIce.Application.Controllers
+{
+    public class HomeController : Controller
+    {
+        public IActionResult Index()
+        {
+            return View();
+        }
 
+        public IActionResult About()
+        {
+            ViewData["Message"] = "Your application description page.";
 
-	public class HomeController : Controller {
-		private readonly SLICKIceDBContext _context;
+            return View();
+        }
 
-		public HomeController(SLICKIceDBContext context) {
-			_context = context;
-		}
-		
-		// GET: /Home/
-		public IActionResult Index()
-		{
-			return View();
-		}
+        public IActionResult Contact()
+        {
+            ViewData["Message"] = "Your contact page.";
 
-		// GET: /Home/Welcome
-		public IActionResult Welcome(string name, int ID = 1)
-		{
-			ViewData["Name"] = name;
-			ViewData["Id"] = ID;
+            return View();
+        }
 
-			return View();
-		}
-
-		public IActionResult Login() {
-			return View();
-		}
-	}
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+    }
 }

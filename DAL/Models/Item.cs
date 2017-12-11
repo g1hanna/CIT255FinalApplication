@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SLICKIce.Application.Models
 {
@@ -18,6 +19,8 @@ namespace SLICKIce.Application.Models
 			Inventory = new HashSet<Inventory>();
 		}
 
+		[Key]
+		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int ItemId { get; set; }
 
 		[StringLength(60, MinimumLength = 3)]

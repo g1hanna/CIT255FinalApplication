@@ -101,9 +101,9 @@ namespace SLICKIce.DAL
 		}
 		#endregion
 
-		public async Task<IQueryable<Account>> SelectAllAsync()
+		public async Task<IEnumerable<Account>> SelectAllAsync()
 		{
-			return await new Task<IQueryable<Account>>(SelectAll);
+			return await _context.Account.Where(a => true).ToListAsync();
 		}
 
 		public async Task<Account> SelectByIdAsync(Account record)
@@ -111,32 +111,31 @@ namespace SLICKIce.DAL
 			return await _context.Account.SingleOrDefaultAsync(a => a.AccountId == record.AccountId);
 		}
 
-		public async void InsertAsync(Account record)
+		public async Task InsertAsync(Account record)
 		{
-			await _context.AddAsync(record);
+			_context.Add(record);
 			//_accounts.FromSql($"INSERT INTO Account VALUES ( {record.AccountId}, {record.AccountUsername}, {record.AccountPassword}, {record.AccountFirstName}, {record.AccountLastName} )");
-			SaveAsync();
+			await SaveAsync();
 		}
 
-		public async void UpdateAsync(Account record)
+		public async Task UpdateAsync(Account record)
 		{
 			var target = await _context.Account.SingleOrDefaultAsync(a => a.AccountId == record.AccountId);
-			
-			Delete(target);
-			Insert(record);
-			SaveAsync();
+			_context.Remove(target);
+			_context.Add(record);
+			await SaveAsync();
 		}
 
-		public async void DeleteAsync(Account record)
+		public async Task DeleteAsync(Account record)
 		{
 			var target = await _context.Account.SingleOrDefaultAsync(a => a.AccountId == record.AccountId);
 
 			_context.Remove(target);
 			//_accounts.FromSql($"DELETE FROM Account WHERE AccountId = {record.AccountId};");
-			SaveAsync();
+			await SaveAsync();
 		}
 
-		public async void SaveAsync()
+		public async Task SaveAsync()
 		{
 			await _context.SaveChangesAsync();
 		}

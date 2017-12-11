@@ -42,7 +42,7 @@ namespace SLICKIce.DAL
 
 		public void Save() {
 			//_context.Item = _items;
-			_context.SaveChangesAsync();
+			_context.SaveChanges();
 		}
 
 		public IQueryable<Item> SelectAll() {
@@ -56,15 +56,8 @@ namespace SLICKIce.DAL
 		public void Update(Item record) {
 			var target = _context.Item.SingleOrDefault(i => i.ItemId == record.ItemId);
 			Delete(target);
+			Save();
 			Insert(record);
-			//_items.FromSql($"UPDATE Item SET "+
-			//	$"ItemId = {record.ItemId}, "+
-			//	$"ItemName = {record.ItemName}, "+
-			//	$"ItemDescription = {record.ItemDescription}, "+
-			//	$"ItemType = {record.ItemType}, "+
-			//	$"ItemCondition = {record.ItemCondition} "+
-			//	$"WHERE Item.ItemId = {record.ItemId};");
-			//Save();
 		}
 		
 
@@ -76,11 +69,11 @@ namespace SLICKIce.DAL
 			if (!_disposedValue) {
 				if (disposing) {
 					// dispose managed state (managed objects).
-					
+					_context.Dispose();
 				}
 
 				// free unmanaged resources (unmanaged objects) and override a finalizer below.
-				_context.Dispose();
+				
 
 				// set large fields to null.
 				
@@ -102,24 +95,42 @@ namespace SLICKIce.DAL
 			// uncomment the following line if the finalizer is overridden above.
 			GC.SuppressFinalize(this);
 		}
+		#endregion
 
-		public async Task<IQueryable<Item>> SelectAllAsync()
+		public async Task<IEnumerable<Item>> SelectAllAsync()
 		{
-			var task = new Task<IQueryable<Item>>(() => {
-				return _context.Item.Where(i => true);
-			});
-			return await task;
+			return await _context.Item.ToListAsync();
 		}
 
 		public async Task<Item> SelectByIdAsync(Item record)
 		{
-			var task = new Task<Item>(() => SelectById(record));
-			return await task;
+			return await _context.Item.SingleOrDefaultAsync(i => i.ItemId == record.ItemId);
 		}
-		#endregion
 
-		public async void SaveAsync() {
+		public async Task SaveAsync() {
 			await _context.SaveChangesAsync();
+		}
+
+		public async Task InsertAsync(Item record) {
+			_context.Add(record);
+			//_items.FromSql($"INSERT INTO Item VALUES ( {record.ItemId}, {record.ItemName}, {record.ItemDescription}, {(int)record.ItemType}, {record.ItemCondition} );");
+			await SaveAsync();
+		}
+
+		public async Task DeleteAsync(Item record) {
+			var target = await _context.Item.SingleOrDefaultAsync(i => i.ItemId == record.ItemId);
+
+			_context.Remove(target);
+			//_items.FromSql($"DELETE FROM Item WHERE ItemId = {record.ItemId};");
+			await SaveAsync();
+		}
+
+		public async Task UpdateAsync(Item record) {
+			var target = await _context.Item.SingleOrDefaultAsync(i => i.ItemId == record.ItemId);
+			_context.Remove(target);
+			Save();
+			_context.Add(record);
+			await SaveAsync();
 		}
 	}
 }

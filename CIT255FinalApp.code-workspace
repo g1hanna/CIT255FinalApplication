@@ -1,10 +1,10 @@
 {
 	"folders": [
 		{
-			"path": "Application"
+			"path": "DAL"
 		},
 		{
-			"path": "DAL"
+			"path": "Application"
 		}
 	],
 	"settings": {}
