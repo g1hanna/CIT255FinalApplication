@@ -12588,11 +12588,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "f:\\CodeSpace\\CIT255\\CIT255FinalApplication\\DAL\\DAL.csproj",
+      "projectUniqueName": "F:\\CodeSpace\\CIT255\\CIT255FinalApplication\\DAL\\DAL.csproj",
       "projectName": "DAL",
-      "projectPath": "f:\\CodeSpace\\CIT255\\CIT255FinalApplication\\DAL\\DAL.csproj",
+      "projectPath": "F:\\CodeSpace\\CIT255\\CIT255FinalApplication\\DAL\\DAL.csproj",
       "packagesPath": "C:\\Users\\G1HannaMax\\.nuget\\packages\\",
-      "outputPath": "f:\\CodeSpace\\CIT255\\CIT255FinalApplication\\DAL\\obj\\",
+      "outputPath": "F:\\CodeSpace\\CIT255\\CIT255FinalApplication\\DAL\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
