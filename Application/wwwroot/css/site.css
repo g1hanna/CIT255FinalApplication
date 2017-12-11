@@ -38,7 +38,5 @@
 }
 
 #main-content {
-    background-image: url("../images/SlickIceSceneryBlurred.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-color: white;
 }
