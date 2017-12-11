@@ -94,8 +94,16 @@ namespace SLICKIce.Application.Controllers
         {
             if (ModelState.IsValid)
             {
-                _itemsRepo.Insert(item);
-                return RedirectToAction(nameof(Index));
+                try {
+                    _itemsRepo.Insert(item);
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (DbUpdateException) {
+                    return RedirectToPage("/Shared/Error");
+                }
+                catch {
+                    return RedirectToPage("/Shared/Error");
+                }
             }
             return View(item);
         }

@@ -43,6 +43,7 @@ namespace SLICKIce.DAL
 		public void Save() {
 			//_context.Item = _items;
 			_context.SaveChanges();
+			
 		}
 
 		public IQueryable<Item> SelectAll() {
