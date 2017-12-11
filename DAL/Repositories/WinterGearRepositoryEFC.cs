@@ -13,7 +13,7 @@ namespace SLICKIce.DAL
 	/// <summary>
 	/// A mechanism that manages the application's winter sports items through Entity Framework Core
 	/// </summary>
-	public class WinterGearRepositoryEFC : IRespository<Item>
+	public class WinterGearRepositoryEFC : IRespository<Item>, IRespositoryAsync<Item>
 	{
 		SLICKIceDBContext _context;
 		
@@ -42,7 +42,7 @@ namespace SLICKIce.DAL
 
 		public void Save() {
 			//_context.Item = _items;
-			_context.SaveChanges();
+			_context.SaveChangesAsync();
 		}
 
 		public IQueryable<Item> SelectAll() {
@@ -102,8 +102,24 @@ namespace SLICKIce.DAL
 			// uncomment the following line if the finalizer is overridden above.
 			GC.SuppressFinalize(this);
 		}
+
+		public async Task<IQueryable<Item>> SelectAllAsync()
+		{
+			var task = new Task<IQueryable<Item>>(() => {
+				return _context.Item.Where(i => true);
+			});
+			return await task;
+		}
+
+		public async Task<Item> SelectByIdAsync(Item record)
+		{
+			var task = new Task<Item>(() => SelectById(record));
+			return await task;
+		}
 		#endregion
 
-
+		public async void SaveAsync() {
+			await _context.SaveChangesAsync();
+		}
 	}
 }

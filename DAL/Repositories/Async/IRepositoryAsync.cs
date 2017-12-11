@@ -12,13 +12,10 @@ namespace SLICKIce.DAL
     /// Repository pattern.
     /// </summary>
     /// <typeparam name="T">The type of record to use</param>
-    public interface IRespositoryAsync<T> : IDisposable where T : class
+    public interface IRespositoryAsync<T> : IRespository<T> where T : class
     {
         Task<IQueryable<T>> SelectAllAsync();
         Task<T> SelectByIdAsync(T record);
-        void InsertAsync(T record);
-        void UpdateAsync(T record);
-        void DeleteAsync(T record);
         void SaveAsync();
     }
 }
