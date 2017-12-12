@@ -20,7 +20,7 @@ namespace SLICKIce.Application.Models
 		}
 
 		[Key]
-		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+		//[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int ItemId { get; set; }
 
 		[StringLength(60, MinimumLength = 3)]

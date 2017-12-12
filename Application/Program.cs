@@ -24,7 +24,7 @@ namespace SLICKIce.Application
 				try
 				{
 					var context = services.GetRequiredService<SLICKIceDBContext>();
-					DbInitializer.InitializeOverwrite(context);
+					DbInitializer.Initialize(context);
 				}
 				catch (Exception ex)
 				{

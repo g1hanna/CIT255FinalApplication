@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SLICKIce.Application.Models;
@@ -35,6 +36,8 @@ namespace SLICKIce.Application.Data
         {
 			modelBuilder.Entity<Account>(entity =>
 			{
+				entity.HasKey(e => e.AccountId);
+
 				entity.Property(e => e.AccountId)
 					.HasColumnName("AccountID")
 					.ValueGeneratedNever();
@@ -81,7 +84,7 @@ namespace SLICKIce.Application.Data
 			{
 				entity.Property(e => e.ItemId)
 					.HasColumnName("ItemID")
-					.ValueGeneratedOnAdd();
+					.ValueGeneratedNever();
 
 				entity.Property(e => e.ItemCondition).HasDefaultValueSql("((10))");
 

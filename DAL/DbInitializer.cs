@@ -14,21 +14,22 @@ namespace SLICKIce.Application.Data
 		public static bool Initialize(SLICKIceDBContext context)
 		{
 			context.Database.EnsureCreated();
-			bool anyAccounts = false;
+			bool anyItems = false;
 			bool dbInitialized = true;
 
 			// look for any users
 			try {
-				IEnumerable<Account> accountRecords = context.Account.FromSql("SELECT * FROM Account");
+				IEnumerable<Account> accountRecords = context.Item.FromSql("SELECT * FROM Account")
+					as IEnumerable<Account>;
 				foreach (var a in accountRecords) {
 					if (a != null) {
-						anyAccounts = true;
+						anyItems = true;
 						break;
 					}
 				}
 
 					// add some if none available
-				if (!anyAccounts)
+				if (!anyItems)
 				{
 					// add test accounts
 					Account[] accounts = generateTestAccounts();

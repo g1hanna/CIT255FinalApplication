@@ -13195,11 +13195,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\CodeSpace\\CIT255\\CIT255FinalApplication\\Application\\Application.csproj",
+      "projectUniqueName": "f:\\CodeSpace\\CIT255\\CIT255FinalApplication\\Application\\Application.csproj",
       "projectName": "Application",
-      "projectPath": "F:\\CodeSpace\\CIT255\\CIT255FinalApplication\\Application\\Application.csproj",
+      "projectPath": "f:\\CodeSpace\\CIT255\\CIT255FinalApplication\\Application\\Application.csproj",
       "packagesPath": "C:\\Users\\G1HannaMax\\.nuget\\packages\\",
-      "outputPath": "F:\\CodeSpace\\CIT255\\CIT255FinalApplication\\Application\\obj\\",
+      "outputPath": "f:\\CodeSpace\\CIT255\\CIT255FinalApplication\\Application\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -13218,8 +13218,8 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "F:\\CodeSpace\\CIT255\\CIT255FinalApplication\\DAL\\DAL.csproj": {
-              "projectPath": "F:\\CodeSpace\\CIT255\\CIT255FinalApplication\\DAL\\DAL.csproj"
+            "f:\\CodeSpace\\CIT255\\CIT255FinalApplication\\DAL\\DAL.csproj": {
+              "projectPath": "f:\\CodeSpace\\CIT255\\CIT255FinalApplication\\DAL\\DAL.csproj"
             }
           }
         }
