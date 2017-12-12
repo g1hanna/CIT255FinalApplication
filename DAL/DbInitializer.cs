@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -17,16 +18,10 @@ namespace SLICKIce.Application.Data
 			bool anyItems = false;
 			bool dbInitialized = true;
 
-			// look for any users
+			// look for any items
 			try {
-				IEnumerable<Account> accountRecords = context.Item.FromSql("SELECT * FROM Account")
-					as IEnumerable<Account>;
-				foreach (var a in accountRecords) {
-					if (a != null) {
-						anyItems = true;
-						break;
-					}
-				}
+				var accountRecords = context.Item.FromSql("SELECT * FROM Item").ToList();
+				if (accountRecords.Any()) anyItems = true;
 
 					// add some if none available
 				if (!anyItems)
