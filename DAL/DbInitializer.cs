@@ -27,14 +27,14 @@ namespace SLICKIce.Application.Data
 				if (!anyItems)
 				{
 					// add test accounts
-					Account[] accounts = generateTestAccounts();
+					// Account[] accounts = generateTestAccounts();
 
-					foreach (Account a in accounts)
-					{
-						context.Add(a);
-					}
+					// foreach (Account a in accounts)
+					// {
+					// 	context.Add(a);
+					// }
 
-					context.SaveChanges();
+					// context.SaveChanges();
 
 					// add test items
 					Item[] items = generateTestItems();
@@ -47,14 +47,14 @@ namespace SLICKIce.Application.Data
 					context.SaveChanges();
 
 					// add test inventory
-					Inventory[] inventory = generateTestInventory();
+					// Inventory[] inventory = generateTestInventory();
 
-					foreach (Inventory i in inventory)
-					{
-						context.Add(i);
-					}
+					// foreach (Inventory i in inventory)
+					// {
+					// 	context.Add(i);
+					// }
 
-					context.SaveChanges();
+					// context.SaveChanges();
 				}
 			}
 			catch (Exception) {
@@ -70,14 +70,14 @@ namespace SLICKIce.Application.Data
 			context.Database.EnsureCreated();
 
 			// add test accounts
-			Account[] accounts = generateTestAccounts();
+			// Account[] accounts = generateTestAccounts();
 
-			foreach (Account a in accounts)
-			{
-				context.Add(a);
-			}
+			// foreach (Account a in accounts)
+			// {
+			// 	context.Add(a);
+			// }
 
-			context.SaveChanges();
+			// context.SaveChanges();
 
 			// add test items
 			Item[] items = generateTestItems();
@@ -90,14 +90,14 @@ namespace SLICKIce.Application.Data
 			context.SaveChanges();
 
 			// add test inventory
-			Inventory[] inventory = generateTestInventory();
+			// Inventory[] inventory = generateTestInventory();
 
-			foreach (Inventory i in inventory)
-			{
-				context.Add(i);
-			}
+			// foreach (Inventory i in inventory)
+			// {
+			// 	context.Add(i);
+			// }
 
-			context.SaveChanges();
+			// context.SaveChanges();
 
 		}
 
