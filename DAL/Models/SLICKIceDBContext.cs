@@ -67,17 +67,17 @@ namespace SLICKIce.Application.Data
 
 				entity.Property(e => e.ItemId).HasColumnName("ItemID");
 
-				entity.HasOne(d => d.Account)
-					.WithMany(p => p.Inventory)
-					.HasForeignKey(d => d.AccountId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("FK_Inventory_Account");
+				// entity.HasOne(d => d.Account)
+				// 	.WithMany(p => p.Inventory)
+				// 	.HasForeignKey(d => d.AccountId)
+				// 	.OnDelete(DeleteBehavior.ClientSetNull)
+				// 	.HasConstraintName("FK_Inventory_Account");
 
-				entity.HasOne(d => d.Item)
-					.WithMany(p => p.Inventory)
-					.HasForeignKey(d => d.ItemId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("FK_Inventory_Item");
+				// entity.HasOne(d => d.Item)
+				// 	.WithMany(p => p.Inventory)
+				// 	.HasForeignKey(d => d.ItemId)
+				// 	.OnDelete(DeleteBehavior.ClientSetNull)
+				// 	.HasConstraintName("FK_Inventory_Item");
 			});
 
 			modelBuilder.Entity<Item>(entity =>
